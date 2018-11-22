@@ -14,7 +14,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-
+    
+    @IBAction func aqwew(_ sender: UITextField) {
+        aaa.text = "foooooo"
+    }
+    
+    @IBOutlet weak var aaa: UITextField!
+    @IBAction func avc(_ sender: Any) {
+        
+    }
 }
 
