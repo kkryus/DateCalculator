@@ -39,10 +39,6 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="dateInput_OnEditingEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="sVt-hJ-YyN"/>
-                                    <action selector="dateInput_OnValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="TYO-Mq-Vn6"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bl-nW-zlR">
                                 <rect key="frame" x="16" y="163" width="69" height="21"/>
@@ -92,7 +88,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xue-Rn-vlF">
-                                <rect key="frame" x="76" y="219" width="36" height="30"/>
+                                <rect key="frame" x="76" y="219" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="beenYearsOutputTextbox"/>
                                 <nil key="textColor"/>
@@ -100,7 +96,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uqJ-oS-nLW">
-                                <rect key="frame" x="177" y="221" width="36" height="30"/>
+                                <rect key="frame" x="177" y="221" width="62" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="beenMonthsOutputTextbox"/>
                                 <nil key="textColor"/>
@@ -108,34 +104,27 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1l-bb-aef">
-                                <rect key="frame" x="120" y="226" width="15" height="21"/>
+                                <rect key="frame" x="143" y="227" width="15" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3V-i3-DQG">
-                                <rect key="frame" x="221" y="228" width="18" height="21"/>
+                                <rect key="frame" x="246" y="226" width="18" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aA8-Ih-1qX">
-                                <rect key="frame" x="272" y="220" width="36" height="30"/>
+                                <rect key="frame" x="272" y="220" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="beenYDaysOutputTextbox"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="d" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YR-bS-RoF">
-                                <rect key="frame" x="321" y="228" width="18" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Days since now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGx-kw-qlL">
                                 <rect key="frame" x="16" y="289" width="119" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -189,14 +178,28 @@
                                     <action selector="startButton_OnTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2TJ-CW-hpj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="d" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5YR-bS-RoF">
+                                <rect key="frame" x="330" y="227" width="18" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="beenDaysTextBox" destination="aA8-Ih-1qX" id="ATU-Fd-utE"/>
+                        <outlet property="beenMonthsTextBox" destination="uqJ-oS-nLW" id="afU-NI-Jvr"/>
+                        <outlet property="beenYearsTextBox" destination="Xue-Rn-vlF" id="yfT-nx-jj2"/>
                         <outlet property="calendarOutputTextBox" destination="Ui4-uZ-XSy" id="X5y-1T-uf2"/>
                         <outlet property="countryInputTextBox" destination="c9N-KP-e6n" id="JFU-xX-2gS"/>
                         <outlet property="dateInputTextBox" destination="SqW-JT-WNC" id="kDx-8f-Cv3"/>
+                        <outlet property="dayOfTheWeekTextBox" destination="Jdr-eQ-a3r" id="Osz-yw-EfM"/>
+                        <outlet property="daysSinceNowTextBo" destination="QrD-4u-BhR" id="6kd-WC-Qwf"/>
+                        <outlet property="easterDateTextBox" destination="VhU-45-cVk" id="ZZx-2M-LFc"/>
+                        <outlet property="monthsSinceNowTextBox" destination="1P1-Fm-tC2" id="I9R-mj-ytG"/>
                         <outlet property="startButton" destination="lbr-kP-bMR" id="cmc-fc-db9"/>
                     </connections>
                 </viewController>
