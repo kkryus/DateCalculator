@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var beenMonthsTextBox: UITextField!
     @IBOutlet weak var beenDaysTextBox: UITextField!
     
+    @IBOutlet weak var calculateWorkingDaysButton: UIButton!
     
     var dateFormat: String = "dd.MM.yyyy"
     var country: String = "Poland"
@@ -52,10 +53,16 @@ class ViewController: UIViewController {
         let date1 = calendar.startOfDay(for: date!)
         let date2 = calendar.startOfDay(for: Date())
         
-        let components = calendar.dateComponents([.day, .month, .year], from: date1, to: date2)
-        beenDaysTextBox.text = String(describing: components.day!)
-        beenMonthsTextBox.text = String(describing: components.month!)
-        beenYearsTextBox.text = String(describing: components.year!)
+        let been = calendar.dateComponents([.day, .month, .year], from: date1, to: date2)
+        beenDaysTextBox.text = String(describing: been.day!)
+        beenMonthsTextBox.text = String(describing: been.month!)
+        beenYearsTextBox.text = String(describing: been.year!)
+        
+        let sinceDays = calendar.dateComponents([.day], from: date1, to: date2)
+        daysSinceNowTextBo.text = String(describing: sinceDays.day!)
+        
+        let sinceMonths = calendar.dateComponents([.month], from: date1, to: date2)
+        monthsSinceNowTextBox.text = String(describing: sinceMonths.month!)
     }
     
     private func setDateFormat(){
@@ -84,7 +91,13 @@ class ViewController: UIViewController {
             return
         }
         country = "Poland"
+        countryInputTextBox.text = "Poland"
         
+    }
+    @IBAction func calculateWorkingDaysButton_OnClick(_ sender: Any) {        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "DateMinusDays", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "dateMinusDaysViewControllerID") as! UIViewController
+        self.present(newViewController, animated: true, completion: nil)
     }
 }
 

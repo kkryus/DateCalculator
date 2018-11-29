@@ -32,7 +32,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SqW-JT-WNC">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="DD.MM.YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SqW-JT-WNC">
                                 <rect key="frame" x="68" y="43" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="dateInputTextbox"/>
@@ -160,7 +160,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9N-KP-e6n">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Poland" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9N-KP-e6n">
                                 <rect key="frame" x="251" y="43" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="countryTextbox"/>
@@ -185,6 +185,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ex2-YI-dne">
+                                <rect key="frame" x="83" y="9" width="209" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Calculate Working Days"/>
+                                <connections>
+                                    <action selector="calculateWorkingDaysButton_OnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AKE-Hp-WZB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -193,6 +201,7 @@
                         <outlet property="beenDaysTextBox" destination="aA8-Ih-1qX" id="ATU-Fd-utE"/>
                         <outlet property="beenMonthsTextBox" destination="uqJ-oS-nLW" id="afU-NI-Jvr"/>
                         <outlet property="beenYearsTextBox" destination="Xue-Rn-vlF" id="yfT-nx-jj2"/>
+                        <outlet property="calculateWorkingDaysButton" destination="ex2-YI-dne" id="cmo-89-IIG"/>
                         <outlet property="calendarOutputTextBox" destination="Ui4-uZ-XSy" id="X5y-1T-uf2"/>
                         <outlet property="countryInputTextBox" destination="c9N-KP-e6n" id="JFU-xX-2gS"/>
                         <outlet property="dateInputTextBox" destination="SqW-JT-WNC" id="kDx-8f-Cv3"/>
