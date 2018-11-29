@@ -12,6 +12,8 @@
 		06920DDB2182078000AE47AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06920DD92182078000AE47AB /* Main.storyboard */; };
 		06920DDD2182078100AE47AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06920DDC2182078100AE47AB /* Assets.xcassets */; };
 		06920DE02182078100AE47AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06920DDE2182078100AE47AB /* LaunchScreen.storyboard */; };
+		602A5F4721B00E0200B5E167 /* DateMinusDays.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 602A5F4621B00E0200B5E167 /* DateMinusDays.storyboard */; };
+		602A5F4921B0122500B5E167 /* DateMinusDaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602A5F4821B0122500B5E167 /* DateMinusDaysViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		06920DDC2182078100AE47AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		06920DDF2182078100AE47AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		06920DE12182078100AE47AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		602A5F4621B00E0200B5E167 /* DateMinusDays.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DateMinusDays.storyboard; sourceTree = "<group>"; };
+		602A5F4821B0122500B5E167 /* DateMinusDaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMinusDaysViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 		06920DD42182078000AE47AB /* DateCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				602A5F4621B00E0200B5E167 /* DateMinusDays.storyboard */,
+				602A5F4821B0122500B5E167 /* DateMinusDaysViewController.swift */,
 				06920DD52182078000AE47AB /* AppDelegate.swift */,
 				06920DD72182078000AE47AB /* ViewController.swift */,
 				06920DD92182078000AE47AB /* Main.storyboard */,
@@ -125,6 +131,7 @@
 			files = (
 				06920DE02182078100AE47AB /* LaunchScreen.storyboard in Resources */,
 				06920DDD2182078100AE47AB /* Assets.xcassets in Resources */,
+				602A5F4721B00E0200B5E167 /* DateMinusDays.storyboard in Resources */,
 				06920DDB2182078000AE47AB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +145,7 @@
 			files = (
 				06920DD82182078000AE47AB /* ViewController.swift in Sources */,
 				06920DD62182078000AE47AB /* AppDelegate.swift in Sources */,
+				602A5F4921B0122500B5E167 /* DateMinusDaysViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
