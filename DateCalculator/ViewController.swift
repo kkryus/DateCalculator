@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var dateInputTextBox: UITextField!
     @IBOutlet weak var countryInputTextBox: UITextField!
     @IBOutlet weak var calendarOutputTextBox: UITextField!
-    @IBOutlet weak var daysSinceNowTextBo: UITextField!
+    @IBOutlet weak var daysSinceNowTextBox: UITextField!
     @IBOutlet weak var monthsSinceNowTextBox: UITextField!
     @IBOutlet weak var easterDateTextBox: UITextField!
     @IBOutlet weak var dayOfTheWeekTextBox: UITextField!
@@ -35,11 +35,16 @@ class ViewController: UIViewController {
     @IBAction func startButton_OnTouchUp(_ sender: Any) {
         setDateFormat()
         setCountry()
+        if(!determineCalendar()){
+            clearView()
+            return
+        }
         if(!countDaysSinceDate()){
+            clearView()
             return
         }
         
-        determineCalendar()
+        
         //calendarOutputTextBox.text = dateFormat
        // let dateFormatter = DateFormatter()
         //dateFormatter.dateFormat = dateFormat
@@ -53,15 +58,15 @@ class ViewController: UIViewController {
         self.present(newViewController, animated: true, completion: nil)
     }
     
-    private func determineCalendar(){
+    private func determineCalendar() -> Bool{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         guard let date = dateFormatter.date(from: dateInputTextBox.text!) else {
-            fatalError("ERROR: Date conversion failed due to mismatched format.")
+            return false
         }
         if(country == "Hungary"){
             guard let dateOfChange = dateFormatter.date(from: "01.11.1587") else {
-                fatalError("ERROR: Date conversion failed due to mismatched format.")
+                return false
             }
             if(date < dateOfChange){
                 calendarOutputTextBox.text = "Julian"
@@ -72,7 +77,7 @@ class ViewController: UIViewController {
         }
         else if(country == "Great Britain"){
             guard let dateOfChange = dateFormatter.date(from: "14.08.1752") else {
-                fatalError("ERROR: Date conversion failed due to mismatched format.")
+                return false
             }
             if(date < dateOfChange){
                 calendarOutputTextBox.text = "Julian"
@@ -83,7 +88,7 @@ class ViewController: UIViewController {
         }
         else {
             guard let dateOfChange = dateFormatter.date(from: "15.10.1582") else {
-                fatalError("ERROR: Date conversion failed due to mismatched format.")
+                return false
             }
             if(date < dateOfChange){
                 calendarOutputTextBox.text = "Julian"
@@ -91,6 +96,27 @@ class ViewController: UIViewController {
             else {
                 calendarOutputTextBox.text = "Gregorian"
             }
+        }
+        return true
+    }
+    
+    private func clearView(){
+        calendarOutputTextBox.text = ""
+        daysSinceNowTextBox.text = ""
+        monthsSinceNowTextBox.text = ""
+        easterDateTextBox.text = ""
+        dayOfTheWeekTextBox.text = ""
+        beenYearsTextBox.text = ""
+        beenMonthsTextBox.text = ""
+        beenDaysTextBox.text = ""
+    }
+    
+    private func countEasterDate(){
+        if(calendarOutputTextBox.text == "Gregorian"){
+            easterDateTextBox.text = ""
+        }
+        else {
+            easterDateTextBox.text = ""
         }
     }
     
@@ -114,7 +140,7 @@ class ViewController: UIViewController {
         beenYearsTextBox.text = String(describing: been.year!)
         
         let sinceDays = calendar.dateComponents([.day], from: date1, to: date2)
-        daysSinceNowTextBo.text = String(describing: sinceDays.day!)
+        daysSinceNowTextBox.text = String(describing: sinceDays.day!)
         
         let sinceMonths = calendar.dateComponents([.month], from: date1, to: date2)
         monthsSinceNowTextBox.text = String(describing: sinceMonths.month!)
