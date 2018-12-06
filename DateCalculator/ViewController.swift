@@ -65,36 +65,54 @@ class ViewController: UIViewController {
             return false
         }
         if(country == "Hungary"){
-            guard let dateOfChange = dateFormatter.date(from: "01.11.1587") else {
+            guard let dateAfterChange = dateFormatter.date(from: "01.11.1587") else {
                 return false
             }
-            if(date < dateOfChange){
+            if(date < dateAfterChange){
                 calendarOutputTextBox.text = "Julian"
             }
             else {
                 calendarOutputTextBox.text = "Gregorian"
+            }
+            guard let dateOfChange = dateFormatter.date(from: "21.10.1587") else {
+                return false
+            }
+            if(date > dateOfChange){
+                dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
             }
         }
         else if(country == "Great Britain"){
-            guard let dateOfChange = dateFormatter.date(from: "14.08.1752") else {
+            guard let dateAfterChange = dateFormatter.date(from: "14.08.1752") else {
                 return false
             }
-            if(date < dateOfChange){
+            if(date < dateAfterChange){
                 calendarOutputTextBox.text = "Julian"
             }
             else {
                 calendarOutputTextBox.text = "Gregorian"
+            }
+            guard let dateOfChange = dateFormatter.date(from: "02.08.1752") else {
+                return false
+            }
+            if(date > dateOfChange){
+                dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
             }
         }
         else {
-            guard let dateOfChange = dateFormatter.date(from: "15.10.1582") else {
+            guard let dateAfterChange = dateFormatter.date(from: "15.10.1582") else {
                 return false
             }
-            if(date < dateOfChange){
+            if(date < dateAfterChange){
                 calendarOutputTextBox.text = "Julian"
             }
             else {
                 calendarOutputTextBox.text = "Gregorian"
+            }
+            guard let dateOfChange = dateFormatter.date(from: "04.10.1582") else {
+                return false
+            }
+            if(date > dateOfChange){
+                dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
             }
         }
         return true
