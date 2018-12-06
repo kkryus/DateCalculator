@@ -35,20 +35,75 @@ class ViewController: UIViewController {
     @IBAction func startButton_OnTouchUp(_ sender: Any) {
         setDateFormat()
         setCountry()
-        countDaysSinceDate()
+        if(!countDaysSinceDate()){
+            return
+        }
+        
+        determineCalendar()
         //calendarOutputTextBox.text = dateFormat
        // let dateFormatter = DateFormatter()
         //dateFormatter.dateFormat = dateFormat
        // let date = dateFormatter.date(from: dateInputTextBox.text!)
         //calendarOutputTextBox.text = dateFormatter.string(from: date!)
     }
-    private func countDaysSinceDate(){
+    
+    @IBAction func calculateWorkingDaysButton_OnClick(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "DateMinusDays", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "dateMinusDaysViewControllerID") as! UIViewController
+        self.present(newViewController, animated: true, completion: nil)
+    }
+    
+    private func determineCalendar(){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        guard let date = dateFormatter.date(from: dateInputTextBox.text!) else {
+            fatalError("ERROR: Date conversion failed due to mismatched format.")
+        }
+        if(country == "Hungary"){
+            guard let dateOfChange = dateFormatter.date(from: "01.11.1587") else {
+                fatalError("ERROR: Date conversion failed due to mismatched format.")
+            }
+            if(date < dateOfChange){
+                calendarOutputTextBox.text = "Julian"
+            }
+            else {
+                calendarOutputTextBox.text = "Gregorian"
+            }
+        }
+        else if(country == "Great Britain"){
+            guard let dateOfChange = dateFormatter.date(from: "14.08.1752") else {
+                fatalError("ERROR: Date conversion failed due to mismatched format.")
+            }
+            if(date < dateOfChange){
+                calendarOutputTextBox.text = "Julian"
+            }
+            else {
+                calendarOutputTextBox.text = "Gregorian"
+            }
+        }
+        else {
+            guard let dateOfChange = dateFormatter.date(from: "15.10.1582") else {
+                fatalError("ERROR: Date conversion failed due to mismatched format.")
+            }
+            if(date < dateOfChange){
+                calendarOutputTextBox.text = "Julian"
+            }
+            else {
+                calendarOutputTextBox.text = "Gregorian"
+            }
+        }
+    }
+    
+    private func countDaysSinceDate() -> Bool{
         let calendar = Calendar.current
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         let date = dateFormatter.date(from: dateInputTextBox.text!)
         
+        if(date == nil){
+            return false
+        }
         // Replace the hour (time) of both dates with 00:00
         let date1 = calendar.startOfDay(for: date!)
         let date2 = calendar.startOfDay(for: Date())
@@ -63,6 +118,7 @@ class ViewController: UIViewController {
         
         let sinceMonths = calendar.dateComponents([.month], from: date1, to: date2)
         monthsSinceNowTextBox.text = String(describing: sinceMonths.month!)
+        return true
     }
     
     private func setDateFormat(){
@@ -94,10 +150,6 @@ class ViewController: UIViewController {
         countryInputTextBox.text = "Poland"
         
     }
-    @IBAction func calculateWorkingDaysButton_OnClick(_ sender: Any) {        
-        let storyBoard: UIStoryboard = UIStoryboard(name: "DateMinusDays", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "dateMinusDaysViewControllerID") as! UIViewController
-        self.present(newViewController, animated: true, completion: nil)
-    }
+    
 }
 
