@@ -26,6 +26,9 @@ class ViewController: UIViewController {
     
     var dateFormat: String = "dd.MM.yyyy"
     var country: String = "Poland"
+    var calendarType: String = "Gregorian"
+    var namesOfDays: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    var monthsCodes: [Int] = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +46,8 @@ class ViewController: UIViewController {
             clearView()
             return
         }
+        countDayOfTheWeek()
+        countEasterDate()
         
         
         //calendarOutputTextBox.text = dateFormat
@@ -69,72 +74,129 @@ class ViewController: UIViewController {
                 return false
             }
             if(date < dateAfterChange){
+                calendarType = "Julian"
                 calendarOutputTextBox.text = "Julian"
+                guard let dateOfChange = dateFormatter.date(from: "21.10.1587") else {
+                    return false
+                }
+                if(date > dateOfChange){
+                    dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
+                }
             }
             else {
+                calendarType = "Gregorian"
                 calendarOutputTextBox.text = "Gregorian"
             }
-            guard let dateOfChange = dateFormatter.date(from: "21.10.1587") else {
-                return false
-            }
-            if(date > dateOfChange){
-                dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-            }
+            
         }
         else if(country == "Great Britain"){
             guard let dateAfterChange = dateFormatter.date(from: "14.08.1752") else {
                 return false
             }
             if(date < dateAfterChange){
+                calendarType = "Julian"
                 calendarOutputTextBox.text = "Julian"
+                guard let dateOfChange = dateFormatter.date(from: "02.08.1752") else {
+                    return false
+                }
+                if(date > dateOfChange){
+                    dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
+                }
             }
             else {
+                calendarType = "Gregorian"
                 calendarOutputTextBox.text = "Gregorian"
             }
-            guard let dateOfChange = dateFormatter.date(from: "02.08.1752") else {
-                return false
-            }
-            if(date > dateOfChange){
-                dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-            }
+            
         }
         else {
             guard let dateAfterChange = dateFormatter.date(from: "15.10.1582") else {
                 return false
             }
             if(date < dateAfterChange){
+                calendarType = "Julian"
                 calendarOutputTextBox.text = "Julian"
+                guard let dateOfChange = dateFormatter.date(from: "04.10.1582") else {
+                    return false
+                }
+                if(date > dateOfChange){
+                    dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
+                }
             }
             else {
+                calendarType = "Gregorian"
                 calendarOutputTextBox.text = "Gregorian"
             }
-            guard let dateOfChange = dateFormatter.date(from: "04.10.1582") else {
-                return false
-            }
-            if(date > dateOfChange){
-                dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-            }
+            
+            
         }
         return true
     }
     
-    private func clearView(){
-        calendarOutputTextBox.text = ""
-        daysSinceNowTextBox.text = ""
-        monthsSinceNowTextBox.text = ""
-        easterDateTextBox.text = ""
-        dayOfTheWeekTextBox.text = ""
-        beenYearsTextBox.text = ""
-        beenMonthsTextBox.text = ""
-        beenDaysTextBox.text = ""
-    }
+   
     
-    private func countEasterDate(){
+    private func countEasterDate() -> Bool{
         if(calendarOutputTextBox.text == "Gregorian"){
             easterDateTextBox.text = ""
         }
         else {
-            easterDateTextBox.text = ""
+            let calendar = Calendar.current
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = dateFormat
+            let date = dateFormatter.date(from: dateInputTextBox.text!)
+            
+            if(date == nil){
+                return false
+            }
+            let date1 = calendar.startOfDay(for: date!)
+            
+            let been = calendar.dateComponents([.year], from: date1)
+            
+            
+            let goldenNumber = (been.year! % 19) + 1
+            easterDateTextBox.text = String(describing:goldenNumber)
+            return true
+        }
+        return true
+    }
+    
+    private func countDayOfTheWeek() -> Bool{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        guard let date = dateFormatter.date(from: dateInputTextBox.text!) else {
+            return false
+        }
+        if(calendarType == "Gregorian"){
+            let myCalendar = Calendar(identifier: .gregorian)
+            let weekDay = myCalendar.component(.weekday, from: date)
+            dayOfTheWeekTextBox.text = namesOfDays[weekDay - 1 ]
+            return true
+        }
+        else {
+            //https://blog.artofmemory.com/how-to-calculate-the-day-of-the-week-4203.html
+            let calendar = Calendar.current
+            let been = calendar.dateComponents([.month, .year], from: date)
+            
+            let yyyyString = String(describing: been.year!)
+            let yy = yyyyString.substring(from:yyyyString.index(yyyyString.endIndex, offsetBy: -2))
+            let yearCode = ((Int(yy)! / 4) + Int(yy)!) % 7
+            
+            let monthCode = monthsCodes[been.month! - 1]
+            var y1 = ""
+            if(been.year! >= 1000){
+                 //y1 = yyyyString.substring(from:yyyyString.index(yyyyString.begIndex, offsetBy: 2))
+            }
+            else {
+                // y1 = yyyyString.substring(from:yyyyString.index(yyyyString.endIndex, offsetBy: 1))
+            }
+            
+            dayOfTheWeekTextBox.text = String(describing: y1)//String(describing: ((Int(last2)! / 4) + Int(last2)!) % 7)
+            /*let goldenNumber = (been.year! % 19) + 1
+            let myCalendar = Calendar(identifier: .gregorian)
+            let weekDay = myCalendar.component(.weekday, from: date)
+            dayOfTheWeekTextBox.text = namesOfDays[weekDay - 1 ]*/
+            return true
         }
     }
     
@@ -148,7 +210,7 @@ class ViewController: UIViewController {
         if(date == nil){
             return false
         }
-        // Replace the hour (time) of both dates with 00:00
+        
         let date1 = calendar.startOfDay(for: date!)
         let date2 = calendar.startOfDay(for: Date())
         
@@ -192,7 +254,17 @@ class ViewController: UIViewController {
         }
         country = "Poland"
         countryInputTextBox.text = "Poland"
-        
+    }
+    
+    private func clearView(){
+        calendarOutputTextBox.text = ""
+        daysSinceNowTextBox.text = ""
+        monthsSinceNowTextBox.text = ""
+        easterDateTextBox.text = ""
+        dayOfTheWeekTextBox.text = ""
+        beenYearsTextBox.text = ""
+        beenMonthsTextBox.text = ""
+        beenDaysTextBox.text = ""
     }
     
 }
