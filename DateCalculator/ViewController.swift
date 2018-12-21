@@ -176,7 +176,7 @@ class ViewController: UIViewController {
         else {
             //https://blog.artofmemory.com/how-to-calculate-the-day-of-the-week-4203.html
             let calendar = Calendar.current
-            let been = calendar.dateComponents([.month, .year], from: date)
+            let been = calendar.dateComponents([.day, .month, .year], from: date)
             
             let yyyyString = String(describing: been.year!)
             let yy = yyyyString.substring(from:yyyyString.index(yyyyString.endIndex, offsetBy: -2))
@@ -185,17 +185,20 @@ class ViewController: UIViewController {
             let monthCode = monthsCodes[been.month! - 1]
             var y1 = ""
             if(been.year! >= 1000){
-                 //y1 = yyyyString.substring(from:yyyyString.index(yyyyString.begIndex, offsetBy: 2))
+                y1 = String(yyyyString.characters.prefix(2))//yyyyString.substring(from:yyyyString.index(yyyyString.begIndex, offsetBy: 2))
             }
             else {
-                // y1 = yyyyString.substring(from:yyyyString.index(yyyyString.endIndex, offsetBy: 1))
+                y1 = String(yyyyString.characters.prefix(1))//yyyyString.substring(from:yyyyString.index(yyyyString.endIndex, offsetBy: 1))
             }
-            
-            dayOfTheWeekTextBox.text = String(describing: y1)//String(describing: ((Int(last2)! / 4) + Int(last2)!) % 7)
-            /*let goldenNumber = (been.year! % 19) + 1
-            let myCalendar = Calendar(identifier: .gregorian)
-            let weekDay = myCalendar.component(.weekday, from: date)
-            dayOfTheWeekTextBox.text = namesOfDays[weekDay - 1 ]*/
+            let centuryCode = (18 - Int(y1)!) % 7
+            var leapCode = 0
+            if(Int(yyyyString)! % 4 == 0 ){
+                if(been.month! == 1 || been.month! == 2){
+                    leapCode = 1
+                }
+            }
+            let dayCode = (yearCode + monthCode + centuryCode + been.day! - leapCode) % 7
+            dayOfTheWeekTextBox.text = namesOfDays[dayCode]
             return true
         }
     }
