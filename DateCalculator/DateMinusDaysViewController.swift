@@ -11,11 +11,22 @@ import Foundation
 
 class DateMinusDaysViewController : UIViewController {
  
+    @IBOutlet weak var julianCalendarSwitch: UISwitch!
+    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var countryInputTextBox: UITextField!
+    @IBOutlet weak var dateInputTextBox: UITextField!
+    @IBOutlet weak var workingDaysInputTextBox: UITextField!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var finalDateInputTextBox: UITextField!
+    @IBOutlet weak var missingDaysTable: UITableView!
     
-    @IBOutlet weak var asdasd: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
+    @IBAction func julianCalendarSwitch_OnClick(_ sender: Any) {
+        countryLabel.isEnabled = julianCalendarSwitch.isOn
+        countryInputTextBox.isEnabled = julianCalendarSwitch.isOn
+    }
 }
