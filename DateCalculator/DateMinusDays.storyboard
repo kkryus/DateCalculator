@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JvJ-mZ-QM6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JvJ-mZ-QM6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -103,6 +103,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="startButton"/>
                                 <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="startButton_OnClick:" destination="JvJ-mZ-QM6" eventType="touchUpInside" id="DNI-Pk-jjj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,7 +114,7 @@
                     <connections>
                         <outlet property="countryInputTextBox" destination="fYM-6f-IUJ" id="Sn9-Dp-3d8"/>
                         <outlet property="countryLabel" destination="APD-T2-urF" id="vYD-PP-zvw"/>
-                        <outlet property="dateInputTextBox" destination="mAp-LL-g7Z" id="JCJ-Ou-EMT"/>
+                        <outlet property="dateInputTextBox" destination="1Bh-2y-2pB" id="4w5-Qw-NG5"/>
                         <outlet property="finalDateInputTextBox" destination="Thz-KF-Dwp" id="q6h-qD-Wpv"/>
                         <outlet property="julianCalendarSwitch" destination="3Vz-59-Qf1" id="U1X-8c-Vn3"/>
                         <outlet property="startButton" destination="89L-B3-Xjg" id="1jo-6N-VYD"/>

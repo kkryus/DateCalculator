@@ -201,7 +201,6 @@ class ViewController: UIViewController {
             return true
         }
         else {
-            
             let dayCode = countJulianDayOfTheWeek(date: date)
             dayOfTheWeekTextBox.text = namesOfDays[dayCode]
             return true
