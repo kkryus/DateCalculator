@@ -107,6 +107,13 @@
                                     <action selector="startButton_OnClick:" destination="JvJ-mZ-QM6" eventType="touchUpInside" id="DNI-Pk-jjj"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fK8-q9-z4u">
+                                <rect key="frame" x="25" y="388" width="297" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="85N-2I-h33"/>
@@ -118,6 +125,7 @@
                         <outlet property="finalDateInputTextBox" destination="Thz-KF-Dwp" id="q6h-qD-Wpv"/>
                         <outlet property="julianCalendarSwitch" destination="3Vz-59-Qf1" id="U1X-8c-Vn3"/>
                         <outlet property="startButton" destination="89L-B3-Xjg" id="1jo-6N-VYD"/>
+                        <outlet property="tmp" destination="fK8-q9-z4u" id="MjA-dx-BO1"/>
                         <outlet property="workingDaysInputTextBox" destination="mAp-LL-g7Z" id="rOG-9g-M3S"/>
                     </connections>
                 </viewController>
