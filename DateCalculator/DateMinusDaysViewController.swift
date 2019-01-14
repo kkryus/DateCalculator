@@ -12,20 +12,14 @@ import Foundation
 class DateMinusDaysViewController : UIViewController {
     
     var dateFormat: String = "dd.MM.yyyy"
-    var country: String = "Poland"
-    var calendarType: String = "Gregorian"
-    var julianEasterDates: [String] = ["5.04", "25.03", "13.04", "2.04", "22.03", "10.04", "30.03", "18.04", "7.04", "27.03", "15.04", "4.04", "24.03", "12.04", "1.04", "21.03", "9.04", "29.03", "17.04"]
     var monthsCodes: [Int] = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]
- 
-    @IBOutlet weak var julianCalendarSwitch: UISwitch!
-    @IBOutlet weak var countryLabel: UILabel!
-    @IBOutlet weak var countryInputTextBox: UITextField!
+
     @IBOutlet weak var dateInputTextBox: UITextField!
     @IBOutlet weak var workingDaysInputTextBox: UITextField!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var finalDateInputTextBox: UITextField!
-    @IBOutlet weak var missingDaysTable: UITableView!
     
+    @IBOutlet weak var tab: UIButton!
     @IBOutlet weak var tmp: UITextField!
     
     override func viewDidLoad() {
@@ -33,10 +27,14 @@ class DateMinusDaysViewController : UIViewController {
     }
     
     @IBAction func startButton_OnClick(_ sender: Any) {
-        setCountry()
         setDateFormat()
-        determineCalendar()
         calculateWorkingDays()
+    }
+    
+    @IBAction func tabOnClick(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "MainID") as! UIViewController
+        self.present(newViewController, animated: true, completion: nil)
     }
     
     private func calculateWorkingDays() -> Bool {
@@ -47,19 +45,13 @@ class DateMinusDaysViewController : UIViewController {
         }
         let numberOfWorkingDays = Int(workingDaysInputTextBox.text!)
         if(numberOfWorkingDays != nil){
-            if(calendarType == "Gregorian"){
-                addDays(date: &date, extraDays: numberOfWorkingDays!)
-            }
-            else {
-                
-            }
+            addDays(date: &date, extraDays: numberOfWorkingDays!)
         }
         else {
             return false
         }
         
         finalDateInputTextBox.text = String(describing: date)
-        //let nextDate = Calendar.current.date(byAdding: .day, value: i, to: startDate)
         return true
     }
     
@@ -83,7 +75,7 @@ class DateMinusDaysViewController : UIViewController {
             }
             
         }
-        tmp.text = tmp.text! + "|" +  String(describing: counter) + "|"
+        //tmp.text = tmp.text! + "|" +  String(describing: counter) + "|"
         //Dodaje dni wolne
         if (counter > 0) {
             //tmp.text = tmp.text! + String(describing: counter) + "|";
@@ -92,6 +84,7 @@ class DateMinusDaysViewController : UIViewController {
         //Gdy kończy się na dniu wolnym
         while (isHoliday(date: date, easterDate: easter)) {
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+            //tmp.text = tmp.text! + "t"
             if (year != been.year) {
                 year = been.year
                 easter = countEasterDate(date: date)
@@ -102,11 +95,11 @@ class DateMinusDaysViewController : UIViewController {
     private func isHoliday(date : Date, easterDate : Date) -> Bool {
         let day = countGregorianDayOfTheWeek(date: date)
         if (day == 1 || day == 7) {
-            tmp.text = tmp.text! + "t"
+            //tmp.text = tmp.text! + "t"
             return true;
         }
         else {
-            tmp.text = tmp.text! + "f"
+            //tmp.text = tmp.text! + "f"
         }
         let calendar = Calendar.current
         let been = calendar.dateComponents([.day, .month], from: date)
@@ -114,12 +107,7 @@ class DateMinusDaysViewController : UIViewController {
         
         var month = been.month!
         var holidays: [String]
-        if(country == "Poland"){
-            holidays = ["1/1", "6/1", "1/5", "3/5", "15/8", "1/11", "11/11", "25/12", "26/12"];
-        }
-        else {
-            holidays = ["1/1", "6/1", "1/5", "3/5", "15/8", "1/11", "11/11", "25/12", "26/12"];
-        }
+        holidays = ["1/1", "6/1", "1/5", "3/5", "15/8", "1/11", "11/11", "25/12", "26/12"];
         
         if (holidays.index(of: String(describing: dayInMonth) + "/" + String(describing: month)) != nil) {
             return true;
@@ -150,34 +138,11 @@ class DateMinusDaysViewController : UIViewController {
     }
 
     private func countEasterDate(date: Date) -> Date{
-        if(calendarType == "Gregorian"){
             let calendar = Calendar.current
             let been = calendar.dateComponents([.year], from: date)
             let components = countGregorianEasterDate(year: been.year!)
             return Calendar.current.date(from: components)!
             //easterDateTextBox.text = String(describing: Calendar.current.date(from: components)!)//""
-        }
-        else {
-            let calendar = Calendar.current
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = dateFormat
-            
-            //if(date == nil){
-            //    return false
-            //}
-            let date1 = calendar.startOfDay(for: date)
-            
-            let been = calendar.dateComponents([.year], from: date1)
-            
-            let goldenNumber = (been.year! % 19)
-            let dateBeforeEaster = julianEasterDates[goldenNumber]
-            let fullDateBeforeEaster = dateFormatter.date(from: dateBeforeEaster + "." + String(describing:been.year!))
-            let julianDayOfTheWeekCode = countJulianDayOfTheWeek(date: fullDateBeforeEaster!)
-            let easterDate = Calendar.current.date(byAdding: .day, value: 7 - julianDayOfTheWeekCode, to: fullDateBeforeEaster!)
-            return easterDate!
-            //easterDateTextBox.text = String(describing:easterDate!)
-        }
     }
     
     private func countGregorianEasterDate(year: Int) -> DateComponents{
@@ -227,99 +192,7 @@ class DateMinusDaysViewController : UIViewController {
         let dayCode = (yearCode + monthCode + centuryCode + been.day! - leapCode) % 7
         return dayCode
     }
-    
-    @IBAction func julianCalendarSwitch_OnClick(_ sender: Any) {
-        countryLabel.isEnabled = julianCalendarSwitch.isOn
-        countryInputTextBox.isEnabled = julianCalendarSwitch.isOn
-    }
-    
-    private func determineCalendar() -> Bool{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        guard let date = dateFormatter.date(from: dateInputTextBox.text!) else {
-            return false
-        }
-        if(country == "Hungary"){
-            guard let dateAfterChange = dateFormatter.date(from: "01.11.1587") else {
-                return false
-            }
-            if(date < dateAfterChange){
-                setCalendarAsJulian()
-                guard let dateOfChange = dateFormatter.date(from: "21.10.1587") else {
-                    return false
-                }
-                if(date > dateOfChange){
-                    dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-                }
-            }
-            else {
-                setCalendarAsGregorian()
-            }
-        }
-        else if(country == "Great Britain"){
-            guard let dateAfterChange = dateFormatter.date(from: "14.08.1752") else {
-                return false
-            }
-            if(date < dateAfterChange){
-                setCalendarAsJulian()
-                guard let dateOfChange = dateFormatter.date(from: "02.08.1752") else {
-                    return false
-                }
-                if(date > dateOfChange){
-                    dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-                }
-            }
-            else {
-                setCalendarAsGregorian()
-            }
-        }
-        else {
-            guard let dateAfterChange = dateFormatter.date(from: "15.10.1582") else {
-                return false
-            }
-            if(date < dateAfterChange){
-                setCalendarAsJulian()
-                guard let dateOfChange = dateFormatter.date(from: "04.10.1582") else {
-                    return false
-                }
-                if(date > dateOfChange){
-                    dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-                }
-            }
-            else {
-                setCalendarAsGregorian()
-            }
-        }
-        return true
-    }
-    
-    private func setCalendarAsJulian(){
-        calendarType = "Julian"
-    }
-    
-    private func setCalendarAsGregorian(){
-        calendarType = "Gregorian"
-    }
-    
-    
-    private func setCountry(){
-        if countryInputTextBox.text!.range(of:"Hungary") != nil {
-            country = "Hungary"
-            return
-        }
-        else if countryInputTextBox.text!.range(of:"Spain") != nil{
-            country = "Spain"
-            return
-        }
-        else if countryInputTextBox.text!.range(of:"Great Britain") != nil {
-            country = "Great Britain"
-            return
-        }
-        if(julianCalendarSwitch.isOn){
-            country = "Poland"
-            countryInputTextBox.text = "Poland"
-        }
-    }
+
     
     private func setDateFormat(){
         if dateInputTextBox.text!.range(of:"/") != nil{

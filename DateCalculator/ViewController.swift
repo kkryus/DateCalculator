@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var beenMonthsTextBox: UITextField!
     @IBOutlet weak var beenDaysTextBox: UITextField!
     
+    //@IBOutlet weak var tmp: UIButton!
     @IBOutlet weak var calculateWorkingDaysButton: UIButton!
     
     var dateFormat: String = "dd.MM.yyyy"
@@ -31,8 +32,18 @@ class ViewController: UIViewController {
     var julianEasterDates: [String] = ["5.04", "25.03", "13.04", "2.04", "22.03", "10.04", "30.03", "18.04", "7.04", "27.03", "15.04", "4.04", "24.03", "12.04", "1.04", "21.03", "9.04", "29.03", "17.04"]
     var dayOfTheWeekNumber: Int = -1
     var monthsCodes: [Int] = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]
-    @IBAction func tmp(_ sender: Any) {
-    }
+
+    //@IBAction func tmpOnClick(_ sender: Any) {
+        /*let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        
+        let year =  components.year
+        let month = components.month
+        let day = components.day
+        
+        dateInputTextBox.text = String(describing:day!) + "." + String(describing:month!) + "."  + String(describing:year!)*/
+    //}
     
     override func viewDidLoad() {
         super.viewDidLoad()
