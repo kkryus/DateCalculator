@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var beenMonthsTextBox: UITextField!
     @IBOutlet weak var beenDaysTextBox: UITextField!
     
+    //@IBOutlet weak var tmp: UIButton!
     @IBOutlet weak var calculateWorkingDaysButton: UIButton!
     
     var dateFormat: String = "dd.MM.yyyy"
@@ -31,6 +32,18 @@ class ViewController: UIViewController {
     var julianEasterDates: [String] = ["5.04", "25.03", "13.04", "2.04", "22.03", "10.04", "30.03", "18.04", "7.04", "27.03", "15.04", "4.04", "24.03", "12.04", "1.04", "21.03", "9.04", "29.03", "17.04"]
     var dayOfTheWeekNumber: Int = -1
     var monthsCodes: [Int] = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]
+
+    //@IBAction func tmpOnClick(_ sender: Any) {
+        /*let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        
+        let year =  components.year
+        let month = components.month
+        let day = components.day
+        
+        dateInputTextBox.text = String(describing:day!) + "." + String(describing:month!) + "."  + String(describing:year!)*/
+    //}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +88,7 @@ class ViewController: UIViewController {
                 }
                 if(date > dateOfChange){
                     dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
+                     setCalendarAsGregorian()
                 }
             }
             else {
@@ -92,6 +106,7 @@ class ViewController: UIViewController {
                 }
                 if(date > dateOfChange){
                     dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
+                     setCalendarAsGregorian()
                 }
             }
             else {
@@ -110,6 +125,7 @@ class ViewController: UIViewController {
                 }
                 if(date > dateOfChange){
                     dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
+                    setCalendarAsGregorian()
                 }
             }
             else {
@@ -138,7 +154,9 @@ class ViewController: UIViewController {
                 return false
             }
             let components = countGregorianEasterDate(date: date)
-            easterDateTextBox.text = String(describing: Calendar.current.date(from: components)!)//""
+            let calendar = Calendar(identifier: .gregorian)
+            let easterDate = calendar.date(from: components)!
+            easterDateTextBox.text = dateFormatter.string(from: easterDate)
         }
         else {
             let calendar = Calendar.current
@@ -159,7 +177,8 @@ class ViewController: UIViewController {
             let fullDateBeforeEaster = dateFormatter.date(from: dateBeforeEaster + "." + String(describing:been.year!))
             let julianDayOfTheWeekCode = countJulianDayOfTheWeek(date: fullDateBeforeEaster!)
             let easterDate = Calendar.current.date(byAdding: .day, value: 7 - julianDayOfTheWeekCode, to: fullDateBeforeEaster!)
-            easterDateTextBox.text = String(describing:easterDate!)
+            easterDateTextBox.text = dateFormatter.string(from: easterDate!)
+            //easterDateTextBox.text = String(describing:easterDate!)
             return true
         }
         return true
@@ -201,7 +220,6 @@ class ViewController: UIViewController {
             return true
         }
         else {
-            
             let dayCode = countJulianDayOfTheWeek(date: date)
             dayOfTheWeekTextBox.text = namesOfDays[dayCode]
             return true
@@ -223,15 +241,15 @@ class ViewController: UIViewController {
         let date2 = calendar.startOfDay(for: Date())
         
         let been = calendar.dateComponents([.day, .month, .year], from: date1, to: date2)
-        beenDaysTextBox.text = String(describing: been.day!)
-        beenMonthsTextBox.text = String(describing: been.month!)
-        beenYearsTextBox.text = String(describing: been.year!)
+        beenDaysTextBox.text = String(describing: abs(been.day!))
+        beenMonthsTextBox.text = String(describing: abs(been.month!))
+        beenYearsTextBox.text = String(describing: abs(been.year!))
         
         let sinceDays = calendar.dateComponents([.day], from: date1, to: date2)
-        daysSinceNowTextBox.text = String(describing: sinceDays.day!)
+        daysSinceNowTextBox.text = String(describing: abs(sinceDays.day!))
         
         let sinceMonths = calendar.dateComponents([.month], from: date1, to: date2)
-        monthsSinceNowTextBox.text = String(describing: sinceMonths.month!)
+        monthsSinceNowTextBox.text = String(describing: abs(sinceMonths.month!))
         return true
     }
     
