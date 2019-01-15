@@ -50,8 +50,8 @@ class DateMinusDaysViewController : UIViewController {
         else {
             return false
         }
-        
-        finalDateInputTextBox.text = String(describing: date)
+        finalDateInputTextBox.text = dateFormatter.string(from: date)
+        //finalDateInputTextBox.text = String(describing: date)
         return true
     }
     
