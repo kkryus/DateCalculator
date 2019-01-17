@@ -75,16 +75,12 @@ class DateMinusDaysViewController : UIViewController {
             }
             
         }
-        //tmp.text = tmp.text! + "|" +  String(describing: counter) + "|"
-        //Dodaje dni wolne
+
         if (counter > 0) {
-            //tmp.text = tmp.text! + String(describing: counter) + "|";
             addDays(date: &date, extraDays: counter);
         }
-        //Gdy kończy się na dniu wolnym
         while (isHoliday(date: date, easterDate: easter)) {
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
-            //tmp.text = tmp.text! + "t"
             if (year != been.year) {
                 year = been.year
                 easter = countEasterDate(date: date)
@@ -95,11 +91,9 @@ class DateMinusDaysViewController : UIViewController {
     private func isHoliday(date : Date, easterDate : Date) -> Bool {
         let day = countGregorianDayOfTheWeek(date: date)
         if (day == 1 || day == 7) {
-            //tmp.text = tmp.text! + "t"
             return true;
         }
         else {
-            //tmp.text = tmp.text! + "f"
         }
         let calendar = Calendar.current
         let been = calendar.dateComponents([.day, .month], from: date)
