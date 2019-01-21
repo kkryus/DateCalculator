@@ -21,11 +21,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var beenYearsTextBox: UITextField!
     @IBOutlet weak var beenMonthsTextBox: UITextField!
     @IBOutlet weak var beenDaysTextBox: UITextField!
+    @IBOutlet weak var todayButton: UIButton!
     
     //@IBOutlet weak var tmp: UIButton!
     @IBOutlet weak var calculateWorkingDaysButton: UIButton!
     
+    @IBOutlet weak var aboutButton: UIButton!
     var dateFormat: String = "dd.MM.yyyy"
+    var tmpDateFormat: String = "dd.MM.yyyy"
+    var tmpDateFormatter: DateFormatter = DateFormatter()
     var country: String = "Poland"
     var calendarType: String = "Gregorian"
     var namesOfDays: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -39,7 +43,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startButton_OnTouchUp(_ sender: Any) {
-       // resignFirstResponder()
+        tmpDateFormatter.dateFormat = tmpDateFormat
         setDateFormat()
         setCountry()
         if(!determineCalendar()){
@@ -60,24 +64,47 @@ class ViewController: UIViewController {
         self.present(newViewController, animated: true, completion: nil)
     }
     
+    @IBAction func todayButtonOnClick(_ sender: Any) {
+        /*let date = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        
+        let year =  components.year
+        let month = components.month
+        let day = components.day
+        
+        dateInputTextBox.text = String(describing:day!) + "." + String(describing:month!) + "."  + String(describing:year!)*/
+    }
+    //infoStoryboardID
+
+    @IBAction func aboutOnClick(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "InfoView", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "infoStoryboardID") as! UIViewController
+        self.present(newViewController, animated: true, completion: nil)
+    }
     private func determineCalendar() -> Bool{
         let dateFormatter = DateFormatter()
+        easterDateTextBox.text = "1"
         dateFormatter.dateFormat = dateFormat
+        easterDateTextBox.text = "tu"
         guard let date = dateFormatter.date(from: dateInputTextBox.text!) else {
+            easterDateTextBox.text = "tu3"
             return false
         }
+       easterDateTextBox.text = "tu4"
         if(country == "Hungary"){
-            guard let dateAfterChange = dateFormatter.date(from: "01.11.1587") else {
+            guard let dateAfterChange = tmpDateFormatter.date(from: "01.11.1587") else {
                 return false
             }
             if(date < dateAfterChange){
                 setCalendarAsJulian()
-                guard let dateOfChange = dateFormatter.date(from: "21.10.1587") else {
+                //1.2
+                guard let dateOfChange = tmpDateFormatter.date(from: "21.10.1587") else {
                     return false
                 }
                 if(date > dateOfChange){
                     dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-                     setCalendarAsGregorian()
+                    setCalendarAsGregorian()
                 }
             }
             else {
@@ -85,17 +112,18 @@ class ViewController: UIViewController {
             }
         }
         else if(country == "Great Britain"){
-            guard let dateAfterChange = dateFormatter.date(from: "14.08.1752") else {
+            guard let dateAfterChange = tmpDateFormatter.date(from: "14.08.1752") else {
                 return false
             }
             if(date < dateAfterChange){
                 setCalendarAsJulian()
-                guard let dateOfChange = dateFormatter.date(from: "02.08.1752") else {
+                //1.2
+                guard let dateOfChange = tmpDateFormatter.date(from: "02.08.1752") else {
                     return false
                 }
                 if(date > dateOfChange){
                     dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
-                     setCalendarAsGregorian()
+                    setCalendarAsGregorian()
                 }
             }
             else {
@@ -103,17 +131,37 @@ class ViewController: UIViewController {
             }
             
         }
-        else {
-            guard let dateAfterChange = dateFormatter.date(from: "15.10.1582") else {
+        /*else if(country == "Estonia"){
+            guard let dateAfterChange = tmpDateFormatter.date(from: "14.02.1918") else {
                 return false
             }
             if(date < dateAfterChange){
                 setCalendarAsJulian()
-                guard let dateOfChange = dateFormatter.date(from: "04.10.1582") else {
+                //1.2
+                guard let dateOfChange = tmpDateFormatter.date(from: "31.01.1918") else {
                     return false
                 }
                 if(date > dateOfChange){
                     dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
+                    setCalendarAsGregorian()
+                }
+            }
+            else {
+                setCalendarAsGregorian()
+            }
+        }*/
+        else {
+            guard let dateAfterChange = tmpDateFormatter.date(from: "15.10.1582") else {
+                return false
+            }
+            if(date < dateAfterChange){
+                setCalendarAsJulian()
+                //1.2
+                guard let dateOfChange = tmpDateFormatter.date(from: "04.10.1582") else {
+                   return false
+                }
+                if(date > dateOfChange){
+                     dateInputTextBox.text = dateFormatter.string(from: dateAfterChange)
                     setCalendarAsGregorian()
                 }
             }
@@ -251,6 +299,12 @@ class ViewController: UIViewController {
             dateFormat = "dd-MM-yyyy"
             return
         }
+        //1.1
+        //else if dateInputTextBox.text!.range(of:"\\") != nil {
+        //    dateFormat = "dd\\MM\\yyyy"
+        //    return
+        //}
+        
         dateFormat = "dd.MM.yyyy"
     }
     
@@ -295,6 +349,10 @@ class ViewController: UIViewController {
             country = "Great Britain"
             return
         }
+        /*else if countryInputTextBox.text!.range(of:"Estonia") != nil {
+            country = "Estonia"
+            return
+        }*/
         country = "Poland"
         countryInputTextBox.text = "Poland"
     }

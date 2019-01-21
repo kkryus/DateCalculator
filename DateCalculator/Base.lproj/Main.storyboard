@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -193,11 +193,34 @@
                                     <action selector="calculateWorkingDaysButton_OnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AKE-Hp-WZB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pK0-BW-WhC">
+                                <rect key="frame" x="116" y="599" width="58" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="About"/>
+                                <connections>
+                                    <action selector="aboutOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5fV-uJ-4X5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnD-Hv-0w1">
+                                <rect key="frame" x="286" y="129" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Today"/>
+                                <connections>
+                                    <action selector="todayButtonOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Myi-TS-raA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="pK0-BW-WhC"/>
+                                <exclude reference="BnD-Hv-0w1"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="aboutButton" destination="pK0-BW-WhC" id="fLd-Dh-LPr"/>
                         <outlet property="beenDaysTextBox" destination="aA8-Ih-1qX" id="ATU-Fd-utE"/>
                         <outlet property="beenMonthsTextBox" destination="uqJ-oS-nLW" id="afU-NI-Jvr"/>
                         <outlet property="beenYearsTextBox" destination="Xue-Rn-vlF" id="yfT-nx-jj2"/>
@@ -210,6 +233,7 @@
                         <outlet property="easterDateTextBox" destination="VhU-45-cVk" id="ZZx-2M-LFc"/>
                         <outlet property="monthsSinceNowTextBox" destination="1P1-Fm-tC2" id="I9R-mj-ytG"/>
                         <outlet property="startButton" destination="lbr-kP-bMR" id="cmc-fc-db9"/>
+                        <outlet property="todayButton" destination="BnD-Hv-0w1" id="hVu-ir-LaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

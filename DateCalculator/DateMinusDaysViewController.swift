@@ -13,6 +13,7 @@ class DateMinusDaysViewController : UIViewController {
     
     var dateFormat: String = "dd.MM.yyyy"
     var monthsCodes: [Int] = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]
+    var passedDays: Int = 0
 
     @IBOutlet weak var dateInputTextBox: UITextField!
     @IBOutlet weak var workingDaysInputTextBox: UITextField!
@@ -21,12 +22,15 @@ class DateMinusDaysViewController : UIViewController {
     
     @IBOutlet weak var tab: UIButton!
     @IBOutlet weak var tmp: UITextField!
+    @IBOutlet weak var daysPassedTextBox: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func startButton_OnClick(_ sender: Any) {
+        //2.1
+        //passedDays = 0
         setDateFormat()
         calculateWorkingDays()
     }
@@ -62,6 +66,8 @@ class DateMinusDaysViewController : UIViewController {
         var year = been.year
         var easter = countEasterDate(date: date)
         var counter = 0;
+        //2.1
+        //passedDays += extraDays
         for i in 1...extraDays {
             let calendar = Calendar.current
             let been = calendar.dateComponents([.year], from: date)
@@ -73,7 +79,6 @@ class DateMinusDaysViewController : UIViewController {
             if (isHoliday(date: date, easterDate: easter)) {
                 counter+=1
             }
-            
         }
 
         if (counter > 0) {
@@ -81,11 +86,15 @@ class DateMinusDaysViewController : UIViewController {
         }
         while (isHoliday(date: date, easterDate: easter)) {
             date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+            //2.1
+            //passedDays+=1
             if (year != been.year) {
                 year = been.year
                 easter = countEasterDate(date: date)
             }
         }
+        //2.1
+        //daysPassedTextBox.text = String(describing:passedDays)
     }
 
     private func isHoliday(date : Date, easterDate : Date) -> Bool {
@@ -197,6 +206,11 @@ class DateMinusDaysViewController : UIViewController {
             dateFormat = "dd-MM-yyyy"
             return
         }
+        //1.1
+        //else if dateInputTextBox.text!.range(of:"\\") != nil {
+        //    dateFormat = "dd\\MM\\yyyy"
+        //    return
+        //}
         dateFormat = "dd.MM.yyyy"
     }
 }
